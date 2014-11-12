@@ -1,0 +1,21 @@
+{
+    "travelers": [
+        {
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "phoneNumber": "PhoneNumber",
+            "tripLeader": true
+        },
+        {
+            "firstName": "FirstName",
+            "lastName": "LastName",
+            "phoneNumber": "PhoneNumber"
+        }
+    ],
+    "purposeOfTrip": "This is the purpose of the trip.",
+    "NormalSTS": "This is the Simply True Statement (STS) that the filer usually says.",
+    "TripSTS": "This is the Simply True Statement (STS) for the trip",
+	"locationContactFirstName": "FirstName",
+    "locationContactLastName": "LastName",
+    "locationContactPhoneNumber": "PhoneNumber"
+}

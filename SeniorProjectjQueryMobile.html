@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+	<head>
+
+		<title>Out Of Bed Report</title>
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+
+		<script id = "JavaScript">
+
+		window.onload = page_load_elements; 
+		//On load, hide all selectable fields until dropdown is used
+		var traveler_count = 1; 
+		//For add/remove traveler functions 
+		var trans_count = 1; 
+		//For keeping track of transportation information as related to legs  
+		var lodg_count = 1; 
+		//For keeping track of lodging information as related to legs 
+
+
+		function page_load_elements()
+		{	
+			//Pre: Page has not been loaded
+			//Post: Page is loaded, all values listed have been hidden until corresponding dropdown menu has been changed
+			
+			var public_vehicle = document.getElementById("vehicle_type_public");
+			var private_vehicle = document.getElementById("vehicle_type_private");
+			var rental_vehicle = document.getElementById("vehicle_type_rental"); 
+			//Grab all vehicle fields
+			
+			var commercial_plane = document.getElementById("plane_type_commercial");
+			var private_plane = document.getElementById("plane_type_private"); 
+			//Grab all airplane fields
+			
+			var plane_mode = document.getElementById("plane_mode_of_travel");
+			var vehicle_mode = document.getElementById("vehicle_mode_of_travel"); 
+			var train_mode = document.getElementById("train_mode_of_travel");
+			var other_mode = document.getElementById("other_mode_of_travel"); 
+			//Grab all type selectors, other fields
+
+			var lodging_show = document.getElementById("lodging_section");
+			//Grab all lodging fields
+		
+			var hotel = document.getElementById("lodging_type_hotel"); 
+			var private_res =  document.getElementById("lodging_type_private_residence"); 
+			var other_res = document.getElementById("lodging_type_other"); 
+			//Grab type selectors, other fields 
+
+			var ers_text = document.getElementById("elevated_risk_situation"); 
+			//Grab ERS fields 
+
+			ers_text.style.display = "none";
+
+			public_vehicle.style.display = "none";
+			private_vehicle.style.display = "none";
+			rental_vehicle.style.display = "none";
+			
+			commercial_plane.style.display = "none";
+			private_plane.style.display = "none";
+			
+			plane_mode.style.display = "none";
+			vehicle_mode.style.display = "none";
+			train_mode.style.display = "none";
+			other_mode.style.display = "none";
+			
+			lodging_show.style.display = "none";
+			
+			hotel.style.display = "none";
+			private_res.style.display = "none";
+			other_res.style.display = "none";
+			//Set all of the grabbed fields to not visible 
+
+		}//function page_load_elements
+
+		function add_traveler()
+		{
+			traveler_count = traveler_count + 1; 
+			//Update the traveler count
+			
+			var fname = document.getElementById("trip_member_first_name").value; 
+			var lname = document.getElementById("trip_member_last_name").value; 
+			var number = document.getElementById("trip_member_contact_number").value; 
+			//Get the values from the fields 
+
+			var trav_lbl = document.createElement("h3"); 
+			var fname_lbl = document.createElement("label"); 
+			var lname_lbl = document.createElement("label"); 
+			var number_lbl = document.createElement("label"); 
+			//Create the labels to hold the information/display it 
+
+			trav_lbl.id = "trav_lbl_" + traveler_count; 
+			trav_lbl.innerHTML = "Traveler " + traveler_count; 
+			fname_lbl.id = "fname_lbl_" + traveler_count; 
+			fname_lbl.value = fname; 
+			fname_lbl.innerHTML = "First Name: " + fname; 
+			lname_lbl.id = "lname_lbl_" + traveler_count; 
+			lname_lbl.value = lname; 
+			lname_lbl.innerHTML = "Last Name: " + lname; 
+			number_lbl.id = "number_lbl_" + traveler_count; 
+			number_lbl.value = number; 
+			number_lbl.innerHTML = "Phone Number: " + number; 
+			//Give each label an ID, assign the input field values to the field values, and show what the value is along with a label (innerHTML)
+
+			var in_div = document.getElementById("new_traveler"); 
+			//Grab the div element to display the labels 
+
+			in_div.appendChild(trav_lbl); 
+			in_div.appendChild(fname_lbl);
+			in_div.appendChild(lname_lbl); 
+			in_div.appendChild(number_lbl); 
+			//Add the labels to the div element
+
+			document.getElementById("trip_member_first_name").value = " "; 
+			document.getElementById("trip_member_last_name").value = " "; 
+			document.getElementById("trip_member_contact_number").value = " "; 
+			//Clear the fields for new input 
+
+
+		}//add traveler()
+
+		function add_trans()
+		{
+			 
+			var input_divide = document.getElementById("new_transportation_div"); 
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var trans_choice = document.getElementById("mode_of_travel").value; 
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			//document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
+
+
+			if(trans_choice == "Vehicle")
+			{
+				//if they chose vehicle 
+
+				var veh_choice = document.getElementById("type_of_vehicle").value; 
+				//Grab the value of the vehicle type selector 
+
+				if(veh_choice == "Rental")
+				{
+					//if using a rental car 
+					var rent_co = document.getElementById("rental_car_company").value; 
+					var rent_pu = document.getElementById("rental_car_pickup_date").value; 
+					var rent_do = document.getElementById("rental_car_dropoff_date").value; 
+					var rent_desc = document.getElementById("rental_car_description").value; 
+					//Grab field values 
+
+					var rent_lbl = document.createElement("h3"); 
+					var rent_co_lbl = document.createElement("label"); 
+					var rent_pu_lbl = document.createElement("label"); 
+					var rent_do_lbl = document.createElement("label"); 
+					var rent_desc_lbl = document.createElement("label"); 
+					//Create labels for field values 
+
+
+					rent_lbl.id = "rent_lbl_" + trans_count; 
+					rent_lbl.innerHTML = "Rental Car"; 
+					rent_co_lbl.id = "rent_co_lbl_" + trans_count; 
+					rent_co_lbl.value = rent_co; 
+					rent_co_lbl.innerHTML = "Rental Company: " + rent_co; 
+					rent_pu_lbl.id = "rent_pu_lbl_" + trans_count; 
+					rent_pu_lbl.value = rent_pu; 
+					rent_pu_lbl.innerHTML = "Rental Pickup Date: " + rent_pu; 
+					rent_do_lbl.id = "rent_do_lbl_" + trans_count; 
+					rent_do_lbl.value = rent_do; 
+					rent_do_lbl.innerHTML = "Rental Dropoff Date: " + rent_do; 
+					rent_desc_lbl.id = "rent_desc_lbl_"  + trans_count; 
+					rent_desc_lbl.value = rent_desc; 
+					rent_desc_lbl.innerHTML = "Rental Description: " + rent_desc; 
+					//Assign values, ID's, and label content (innerHTML)
+
+					input_divide.appendChild(rent_lbl); 
+					input_divide.appendChild(rent_co_lbl); 
+					input_divide.appendChild(rent_pu_lbl); 
+					input_divide.appendChild(rent_do_lbl); 
+					input_divide.appendChild(rent_desc_lbl); 
+					//Append labels to divide
+
+					document.getElementById("rental_car_company").value = " "; 
+					document.getElementById("rental_car_pickup_date").value = " ";
+					document.getElementById("rental_car_dropoff_date").value = " ";
+					document.getElementById("rental_car_description").value = " ";
+					//Clear the input fields for next round of information 
+
+				}
+				else if(veh_choice == "Public")
+				{
+					//if using public transportation 
+
+					var pub_desc = document.getElementById("public_vehicle_desc").value; 
+					//Grab input field value
+
+					var pub_lbl = document.createElement("h3"); 
+					var pub_desc_lbl = document.createElement("label");
+					//Create labels for information 
+
+					pub_lbl.id = "pub_lbl_" + trans_count; 
+					pub_lbl.innerHTML = "Public Transportation"; 
+					pub_desc_lbl.id = "pub_desc_lbl_" + trans_count; 
+					pub_desc_lbl.value = pub_desc; 
+					pub_desc_lbl.innerHTML = "Pertinent Information: " + pub_desc; 
+					//Assign values, ID's, label content (innerHTML)
+
+					input_divide.appendChild(pub_lbl); 
+					input_divide.appendChild(pub_desc_lbl); 
+					//Append labels to div 
+
+					document.getElementById("public_vehicle_desc").value = " ";  
+					//Clear input fields 
+
+				}
+				else if(veh_choice == "Private")
+				{
+					//if using private vehicle 
+
+					var priv_desc = document.getElementById("private_vehicle_desc").value; 
+					//Grab value of input field
+
+					var priv_lbl = document.createElement("h3"); 
+					var priv_desc_lbl = document.createElement("label");
+					//Create labels 
+
+					priv_lbl.id = "priv_lbl_" + trans_count; 
+					priv_lbl.innerHTML = "Private Transportation"; 
+					priv_desc_lbl.id = "priv_desc_lbl_" + trans_count; 
+					priv_desc_lbl.value = priv_desc; 
+					priv_desc_lbl.innerHTML = "Pertinent Information: " + priv_desc; 
+					//Assign values, ID's, label content (innerHTML)
+
+					input_divide.appendChild(priv_lbl); 
+					input_divide.appendChild(priv_desc_lbl); 
+					//Append labels to div 
+
+					document.getElementById("private_vehicle_desc").value = " ";
+					//Clear input fields 
+				}
+				else
+				{
+
+				}
+			}
+			else if(trans_choice == "Plane")
+			{
+				//if plane transportation 
+
+				var pln_choice = document.getElementById("type_of_plane").value; 
+				//Grab value of plane type selector 
+
+				if(pln_choice == "Commercial")
+				{	
+					//if flying commercial flight 
+
+					var flight_num = document.getElementById("commercial_flight_number").value; 
+					var flight_car = document.getElementById("commercial_flight_carrier").value; 
+					var apt_dept = document.getElementById("commercial_flight_airport_departed").value; 
+					var dept_tm = document.getElementById("commercial_flight_departure_time").value; 
+					var arr_apt = document.getElementById("commercial_flight_arrival_airport").value; 
+					var arr_tm = document.getElementById("commercial_flight_arrival_time").value; 
+					//Grab values of input fields 
+
+					var flight_num_lbl = document.createElement("label"); 
+					var flight_car_lbl = document.createElement("label"); 
+					var apt_dept_lbl = document.createElement("label"); 
+					var dept_tm_lbl = document.createElement("label"); 
+					var arr_apt_lbl = document.createElement("label"); 
+					var arr_tm_lbl = document.createElement("label"); 
+					var com_flt_lbl = document.createElement("h3");
+					//Create labels 
+
+					flight_num_lbl.id = "flight_num_lbl_" + trans_count; 
+					flight_num_lbl.value = flight_num; 
+					flight_num_lbl.innerHTML = "Flight Number: " + flight_num; 
+					flight_car_lbl.id = "flight_car_lbl_" + trans_count; 
+					flight_car_lbl.value = flight_car; 
+					flight_car_lbl.innerHTML = "Flight Carrier: " + flight_car; 
+					apt_dept_lbl.id = "apt_dept_lbl_" + trans_count; 
+					apt_dept_lbl.value = apt_dept; 
+					apt_dept_lbl.innerHTML = "Airport Departed: " + apt_dept; 
+					dept_tm_lbl.id = "dept_tm_lbl_" + trans_count; 
+					dept_tm_lbl.value = dept_tm; 
+					dept_tm_lbl.innerHTML = "Departure Time: " + dept_tm; 
+					arr_apt_lbl.id = "arr_apt_lbl_" + trans_count; 
+					arr_apt_lbl.value = arr_apt; 
+					arr_apt_lbl.innerHTML = "Airport Arrived At: " + arr_apt; 
+					arr_tm_lbl.id = "arr_tm_lbl_" + trans_count; 
+					arr_tm_lbl.value = arr_tm; 
+					arr_tm_lbl.innerHTML = "Arrival Time: " + arr_tm; 
+					com_flt_lbl.id = "com_flt_lbl_" + trans_count; 
+					com_flt_lbl.innerHTML = "Commercial Flight"; 
+					//Assign values, ID's and label content (innerHTML)
+
+					input_divide.appendChild(com_flt_lbl); 
+					input_divide.appendChild(flight_num_lbl);
+					input_divide.appendChild(flight_car_lbl);
+					input_divide.appendChild(apt_dept_lbl);
+					input_divide.appendChild(dept_tm_lbl);
+					input_divide.appendChild(arr_apt_lbl);
+					input_divide.appendChild(arr_tm_lbl);
+					//Append labels to div 
+
+					document.getElementById("commercial_flight_number").value = " ";
+					document.getElementById("commercial_flight_carrier").value = " ";
+					document.getElementById("commercial_flight_airport_departed").value = " ";
+					document.getElementById("commercial_flight_departure_time").value = " ";
+					document.getElementById("commercial_flight_arrival_airport").value = " ";
+					document.getElementById("commercial_flight_arrival_time").value = " ";
+					//Clear input fields 
+					
+
+
+				}
+				else if(pln_choice == "Private")
+				{
+					//if using private plane 
+
+					var priv_pln_desc = document.getElementById("private_plane_desc").value; 
+					//Grab input field values
+
+					var priv_pln_lbl = document.createElement("h3"); 
+					var priv_pln_desc_lbl = document.createElement("label"); 
+					//Create labels 
+
+					priv_pln_lbl.id = "priv_pln_lbl_" + trans_count; 
+					priv_pln_lbl.innerHTML = "Private Plane"; 
+					priv_pln_desc_lbl.id = "priv_pln_desc_lbl_" + trans_count; 
+					priv_pln_desc_lbl.value = priv_pln_desc; 
+					priv_pln_desc_lbl.innerHTML = "Pertinent Information: " + priv_pln_desc; 
+					//Assign ID's, values, and label content (innerHTML)
+
+					input_divide.appendChild(priv_pln_lbl); 
+					input_divide.appendChild(priv_pln_desc_lbl);
+					//Append labels to div 
+
+					document.getElementById("private_plane_desc").value = " "; 
+					//Clear input fields
+
+				}
+				else
+				{
+
+				}
+			}
+			else if(trans_choice == "Train")
+			{
+				//if train transportation
+
+				var train_desc = document.getElementById("train_transport_desc").value; 
+				//Grab input field value
+
+				var train_desc_lbl = document.createElement("label"); 
+				var train_lbl = document.createElement("h3"); 
+				//Create labels 
+
+				train_desc_lbl.id = "train_desc_lbl_" + trans_count; 
+				train_desc_lbl.value = train_desc; 
+				train_desc_lbl.innerHTML = "Pertinent Information: " + train_desc; 
+				train_lbl.id = "train_lbl_" + trans_count; 
+				train_lbl.innerHTML = "Train Information"; 
+				//Assign ID, value, label content (innerHTML)
+
+				input_divide.appendChild(train_lbl);
+				input_divide.appendChild(train_desc_lbl);
+				//Append labels to div
+
+				document.getElementById("train_transport_desc").value = " "; 
+				//clear input fields 
+
+			}
+			else if(trans_choice == "Other")
+			{
+				//other transportation used 
+
+				var other_desc = document.getElementById("other_transport_desc").value; 
+				//Grab input value
+
+				var other_desc_lbl = document.createElement("label"); 
+				var other_lbl = document.createElement("h3"); 
+				//Create Labels 
+
+				other_desc_lbl.id = "other_desc_lbl_" + trans_count; 
+				other_desc_lbl.value = other_desc; 
+				other_desc_lbl.innerHTML = "Pertinent Information: " + other_desc; 
+				other_lbl.id = "other_lbl_" + trans_count; 
+				other_lbl.innerHTML = "Other Information"; 
+				//Assign id, values, and label content (innerHTML )
+
+				input_divide.appendChild(other_lbl);
+				input_divide.appendChild(other_desc_lbl);
+				//Append labels to div 
+
+				document.getElementById("other_transport_desc").value = " "; 
+				//Clear input fields 
+			}
+			else
+			{
+
+			}
+
+			trans_count = trans_count + 1; 
+			//update hte trans_count 
+		}//add_trans()
+
+		function elevated_risk()
+		{
+			//Pre: Elevated risk section hidden, corresponding dropdown menu showing empty value
+			//Post: Elevated risk section showing 
+
+			var ers_check = document.getElementById("elevated_risk_check");
+			var ers_text = document.getElementById("elevated_risk_situation");  
+			//Grab input fields and selector
+
+			if(ers_check.checked)
+			{
+				//if box is checked 
+
+				ers_text.style.display = "block"; 
+				//display the fields 
+			}
+			else
+			{
+				//if box is unchecked 
+
+				ers_text.style.display = "none"; 
+				//leave the fields invisible (from result of page_load_elements())
+			}
+
+		}//function elevated_risk
+
+		function transportation_choice()
+		{
+			//Pre: Transportation type fields are hidden, corresponding dropdown menu showing empty value 
+			//Post: Transportation type fields are showing according to value of corresponding dropdown menus 
+			
+			var mode = document.getElementById("mode_of_travel"); 
+			var plane_mode = document.getElementById("plane_mode_of_travel");
+			var vehicle_mode = document.getElementById("vehicle_mode_of_travel"); 
+			var train_mode = document.getElementById("train_mode_of_travel");
+			var other_mode = document.getElementById("other_mode_of_travel"); 
+			//Grab type of transportation value and all input fields associated with all methods of travel
+
+
+			if(mode.value == "Plane")
+			{
+				//if using plane travel 
+
+				plane_mode.style.display = "block";
+				vehicle_mode.style.display = "none";
+				train_mode.style.display = "none";
+				other_mode.style.display = "none";
+				//set plane input fields visible, hide all others 
+				
+
+			}
+			else if(mode.value == "Vehicle")
+			{
+				//if using vehicle travel 
+
+				vehicle_mode.style.display = "block";
+				plane_mode.style.display = "none";
+				train_mode.style.display = "none";
+				other_mode.style.display = "none";
+				//set vehicle input fields visible, hide all others
+				
+			}
+			else if(mode.value == "Train")
+			{
+				//if using plane travel 
+
+				train_mode.style.display = "block";
+				plane_mode.style.display = "none";
+				vehicle_mode.style.display = "none";
+				other_mode.style.display = "none";
+				//set train input fields visible, hide all others
+			}
+			else if(mode.value == "Other")
+			{
+				//if using other travel method 
+
+				other_mode.style.display = "block";
+				plane_mode.style.display = "none";
+				vehicle_mode.style.display = "none";
+				train_mode.style.display = "none";
+				//set other input fields visible, hide all others
+			}
+			else
+			{
+				//hide all fields 
+				other_mode.style.display = "none";
+				plane_mode.style.display = "none";
+				vehicle_mode.style.display = "none";
+				train_mode.style.display = "none";
+			}
+		}//function transportation_choice
+
+		function vehicle_type_choice()
+		{
+			//Pre: Mode_of_travel = vehicle, all fields hidden besides corresponding dropdown menus 
+			//Post: Information fields showing based on corresponding dropdown menus 
+ 
+			var vehicle_type = document.getElementById("type_of_vehicle"); 
+			var public_vehicle = document.getElementById("vehicle_type_public");
+			var private_vehicle = document.getElementById("vehicle_type_private");
+			var rental_vehicle = document.getElementById("vehicle_type_rental"); 
+			//Grab all vehicle input fields 
+
+			if(vehicle_type.value == "Rental")
+			{
+				public_vehicle.style.display = "none";
+				private_vehicle.style.display = "none"; 
+				rental_vehicle.style.display = "block";
+				//show rental fields, hide others 
+			}
+			else if(vehicle_type.value == "Private")
+			{
+				public_vehicle.style.display = "none";
+				private_vehicle.style.display = "block"; 
+				rental_vehicle.style.display = "none";
+				//show rental fields, hide others
+			}
+			else if(vehicle_type.value == "Public")
+			{
+				public_vehicle.style.display = "block";
+				private_vehicle.style.display = "none"; 
+				rental_vehicle.style.display = "none";
+				//show rental fields, hide others
+			}
+			else
+			{
+				public_vehicle.style.display = "none";
+				private_vehicle.style.display = "none"; 
+				rental_vehicle.style.display = "none";
+				//hide all fields 
+			}
+		}//function vehicle_type_choice
+
+		function plane_type_choice()
+		{
+			//Pre: mode_of_travel = plane, all fields hidden besides corresponding dropdown menus 
+			//Post: Information fields showing based on corresponding dropdown menus 
+
+			var plane_type = document.getElementById("type_of_plane"); 
+			var commercial_plane = document.getElementById("plane_type_commercial");
+			var private_plane = document.getElementById("plane_type_private"); 
+
+			if(plane_type.value == "Commercial")
+			{
+				commercial_plane.style.display = "block"; 
+				private_plane.style.display = "none"; 
+			}
+			else if(plane_type.value == "Private")
+			{
+				commercial_plane.style.display = "none"; 
+				private_plane.style.display = "block"; 
+			}
+			else
+			{
+				commercial_plane.style.display = "none"; 
+				private_plane.style.display = "none"; 
+			}
+		}//function plane_type_choice
+
+		function lodging_choice()
+		{
+			//Pre: all corresponding input fields hidden except corresponding dropdown menus
+			//Post: Lodging section visible for information entry post type selection 
+
+			var lodging = document.getElementById("lodging_check");
+			var lodging_show = document.getElementById("lodging_section");
+
+			if(lodging.value == "Yes")
+			{
+				lodging_show.style.display = "block";
+			}
+			else
+			{
+				lodging_show.style.display = "none"; 
+			}
+
+		}//function lodging_choice
+
+		function lodging_type()
+		{
+			//Pre: lodging_check = yes, all input fields for this section hidden except corresponding dropdown menus
+			//Post: Lodging input sections shown based on dropdown choice
+
+			var stay = document.getElementById("type_of_lodging"); 
+			var hotel = document.getElementById("lodging_type_hotel"); 
+			var private_res =  document.getElementById("lodging_type_private_residence"); 
+			var other_res = document.getElementById("lodging_type_other"); 
+
+			if(stay.value == "Hotel")
+			{
+				hotel.style.display = "block"; 
+				private_res.style.display = "none"; 
+				other_res.style.display = "none"; 
+			}
+			else if(stay.value == "Private_residence")
+			{
+				hotel.style.display = "none"; 
+				private_res.style.display = "block"; 
+				other_res.style.display = "none"; 
+			}
+			else if(stay.value == "Other")
+			{
+				hotel.style.display = "none"; 
+				private_res.style.display = "none"; 
+				other_res.style.display = "block"; 
+			}
+			else
+			{
+				hotel.style.display = "none"; 
+				private_res.style.display = "none"; 
+				other_res.style.display = "none"; 
+			}
+		}//function lodging_type
+
+
+		</script><!--script JavaScript-->
+
+
+	</head><!--head-->
+
+	<body>
+
+		<div id = "login_page" data-role = "page">
+
+
+			<a href="#contact_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Log in</a>
+
+		</div>
+
+		<div id = "contact_information" data-role = "page">
+			
+			<h1>Contact Information</h1>
+			
+			<form id = "contact_info_form">
+
+				<h2>Traveler Information</h2>
+
+				<label id = "trip_leader_lbl">Trip Leader?</label>
+				<input type = "checkbox" id = "trip_leader_check"/><br/>
+				<label id = "trip_member_first_name_lbl">First Name: </label>
+				<input type = "text" id = "trip_member_first_name"/><br/>
+				<label id = "trip_member_last_name_lbl">Last Name: </label>
+				<input type = "text" id = "trip_member_last_name"/><br/>
+				<label id = "trip_member_contact_number_lbl">Contact Number: </label>
+				<input type = "text" id = "trip_member_contact_number"/><br/>
+
+				<!--Call Gather_Traveler_Info-->
+				
+				
+				<div id = "new_traveler">
+
+				</div><!--div new_traveler-->
+
+
+				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = " " >Add Traveler</a>
+				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = " " >Remove Traveler</a>
+
+
+				<label id = "trip_purpose_lbl">Purpose of Trip:</label>
+				<textarea id = "purpose_of_trip" rows = "10" cols = "30"></textarea><br/>
+				<label id = "filer_sts_lbl">Filer Simply True Statement: </label>
+				<textarea id = "filer_sts" rows = "10" cols = "30"></textarea><br/>
+				<label id = "group_sts_lbl">Group Simply True Statement: </label>
+				<textarea id = "group_sts" rows = "10" cols = "30"></textarea><br/>
+
+				<!--Call Gather_Pupose_Info-->
+
+				
+				<h2>Location Contact Information</h2>
+				<!--Contact Information of person at location that IMB will reach out to-->
+				<label id = "location_contact_first_name_lbl">First Name: </label> 
+				<input type = "text" id = "location_contact_first_name"/><br/>
+				<label id = "location_contact_last_name_lbl">Last Name: </label>
+				<input type = "text" id = "location_contact_last_name"/><br/>
+				<label id = "location_contact_phone_number_lbl">Phone: </label>
+				<input type = "text" id = "location_contact_number" /><br/>
+
+
+				<label id = "elevated_risk_lbl">Elevated Risk Situation? </label>
+				<input type = "checkbox" id = "elevated_risk_check" onchange = "elevated_risk()"/><br/>
+
+
+
+				<div id = "elevated_risk_situation">
+
+					<label id = "ers_trip_member_first_name_lbl">First Name: </label>
+					<input type = "text" id = "ers_trip_member_first_name"/><br>
+					<label id = "ers_trip_member_last_name_lbl">Last Name: </label>
+					<input type = "text" id = "ers_trip_member_last_name"/><br>
+					<label id = "ers_trip_member_contact_number_lbl">Emergency Contact Phone:</label> 
+					<input type = "text" id = "ers_trip_member_contact_number" placeholder = "(111-111-1111)"/><br/>
+
+					<label id = "form_contact_lbl" >Form of Contact: </label> 
+					<form action = "" id = "ers_contact_type">
+
+						<select id = "form of contact">
+							<option value = "cell_phone">Cell Phone</option>
+							<option value = "satellite_phone">Satellite Phone</option>
+							<option value = "email">Email</option>
+						</select>
+
+					</form><!--form ers_contact_type-->
+
+				</div><!--div elevated_risk_situation-->
+
+				<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Continue</a>
+
+			</form><!--form contact_info_form-->
+
+		</div> <!--div contact_information-->
+
+		<div id = "transportation_information" data-role = "page">
+
+			<form id = "trans_info">
+			
+				<h1>Transportation Information</h1>
+				<br/>
+
+				<label>Day of Departure: </label>
+				<input type = "text" id = "day_of_departure"></input><br/> 
+				<label>Leg Destination: </label>
+				<input type = "text" id = "destination_of_leg"/><br/>
+				<label>Final Destination? </label>
+				<input type = "checkbox" id = "final_dest_indicator"/><br/>
+
+
+				<label>Mode of Travel:</label>
+				<form action = "" id = "mode_of_travel_selector">
+						
+						<select id = "mode_of_travel" onchange = "transportation_choice()">
+							<option value = " "> </option>
+							<option value = "Vehicle" >Vehicle</option>
+							<option value = "Plane" >Plane</option>
+							<option value = "Train" >Train</option>
+							<option value = "Other" >Other</option>
+						</select> <!--select mode_of_travel-->
+				
+				</form> <!--form mode_of_travel_selector-->
+
+				<div id = "vehicle_mode_of_travel">
+					
+					<label>Type of Vehicle:</label>
+
+					<form action = "">
+							
+							<select id = "type_of_vehicle" onchange = "vehicle_type_choice()">
+								<option value = " "> </option>
+								<option value = "Rental">Rental</option>
+								<option value = "Private">Private</option>
+								<option value = "Public">Public</option>
+							</select>
+					
+					</form>
+			
+					<br/>
+					<br/>
+
+					<div id = "vehicle_type_rental">
+				
+						<label id = "rental_car_company_lbl" >Company: </label> 
+						<input type = "text" id = "rental_car_company"/><br/>
+						<label id = "rental_car_pickup_date_lbl">Pickup Date: </label>
+						<input type = "text" id = "rental_car_pickup_date"/><br/>
+						<label id = "rental_car_dropoff_date_lbl">Dropoff Date: </label>
+						<input type = "text" id = "rental_car_dropoff_date"/><br/>
+						<label id = "rental_car_description_lbl">Car Description: </label>
+						<input type = "text" id = "rental_car_description"/><br/>
+						
+				
+					</div><!--vehicle type rental -->
+					
+					<br/>
+					<br/>
+
+					<div id = "vehicle_type_public">
+			
+						<label id = "public_vehicle_desc_lbl">Pertinent Transportation Information: </label>
+						<input type = "text" id = "public_vehicle_desc"/>
+			
+					</div><!--vehicle_type_public-->
+
+					<br/>
+					<br/>
+
+					<div id = "vehicle_type_private">
+				
+						<label id = "private_vehicle_desc_lbl">Pertinent Transportation Information: </label>
+						<input type = "text" id = "private_vehicle_desc"/>
+			
+					</div><!--vehicle_type_private-->
+
+				</div><!--vehicle_mode_of_travel-->		
+
+				<div id = "plane_mode_of_travel">
+
+					<label>Type of Air Transport:</label>
+
+					<form action = "">
+							<select id = "type_of_plane" onchange = "plane_type_choice()">
+								<option value = " "> </option>
+								<option value = "Commercial">Commercial</option>
+								<option value = "Private">Private</option>
+							</select>
+					</form>
+				
+					<div id = "plane_type_private">
+				
+						<label id = "private_plane_desc">Pertinent Information: </label>
+						<input type = "text" id = "private_plane_desc"/>
+				
+					</div><!--div plane_type_private-->
+
+					<div id = "plane_type_commercial">
+				
+						<label id = "commercial_flight_number_lbl">Flight Number: </label>
+						<input type = "text" id = "commercial_flight_number"/><br/>
+						<label id = "commercial_flight_carrier_lbl">Flight Carrier: </label>
+						<input type = "text" id = "commercial_flight_carrier"/><br/>
+						<label id = "commercial_flight_airport_departed_lbl">Airport Departed: </label>
+						<input type = "text" id = "commercial_flight_airport_departed"/><br/>
+						<label id = "commercial_flight_departure_time_lbl">Departure Time: </label> 
+						<input type = "text" id = "commercial_flight_departure_time"/><br/>
+						<label id = "commercial_flight_arrival_airport_lbl">Airport Arrived At: </label>
+						<input type = "text" id = "commercial_flight_arrival_airport"/><br/>
+						<label id = "commercial_flight_arrival_time_lbl">Arrival Time: </label>
+						<input type = "text" id = "commercial_flight_arrival_time"/><br/>
+						
+				
+					</div><!--div plane_type_commercial-->
+
+				</div><!--div plane_mode_of_travel-->
+
+			
+				<div id = "train_mode_of_travel">
+				
+					<label id = "train_transport_desc_lbl">Pertinent Information: </label>
+					<input type = "text" id = "train_transport_desc"/>
+			
+				</div> <!--div train_mode_of_travel-->
+				
+			
+				<div id = "other_mode_of_travel">	
+					
+					<label id = "other_transport_desc_lbl">Pertinent Information: </label>
+					<input type = "text" id = "other_transport_desc"/>
+			
+				</div><!--div other_mode_of_travel-->
+
+				<div id = "new_transportation_div">
+
+				</div>
+
+				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_trans()" >Add Transportation Information</a>
+
+			</form><!--from trans_info-->
+
+			<a href="#contact_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Previous</a>
+			<a href="#lodging_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Continue</a>
+
+		</div> <!--div transportation_information-->
+
+		<div id = "lodging_information" data-role = "page">
+
+			<h1>Lodging Information </h1>
+			<br/>
+
+			<form id = "lodging_info">
+			
+				<label>Need a place to stay on this leg?</label>
+
+				<form action = "">
+					<select id = "lodging_check" onchange = "lodging_choice()">
+						<option value = " "> </option>
+						<option value = "Yes">Yes</option>
+						<option value = "No">No</option>
+					</select>
+				</form>
+				
+				<div id = "lodging_section">
+					
+					Type of Lodging:
+					<form action = "">
+						<select id = "type_of_lodging" onchange = "lodging_type()">
+							<option value = " "> </option>
+							<option value = "Hotel">Hotel</option>
+							<option value = "Private_residence">Private Residence</option>
+							<option value = "Other">Other</option>
+						</select>
+					</form><!--form type_of_lodging-->
+				
+					
+					<div id = "lodging_type_hotel">
+					
+						<label id = "hotel_name_lbl">Hotel Name: </label>
+						<input type = "text" id = "hotel_name"/><br/>
+						<label id = "hotel_address_lbl">Hotel Address: </label>
+						<input type = "text" id = "hotel_address"/><br/>
+						<label id = "hotel_phone_lbl">Hotel Phone: </label>
+						<input type = "text" id = "hotel_phone"/><br/>
+						<label id = "nights_at_hotel_lbl">Nights at Hotel: </label>
+						<input type = "text" id = "nights_at_hotel"/><br/>
+					
+					</div><!--div lodging_type_hotel-->
+													
+					<div id = "lodging_type_private_residence">
+					
+						<label id = "priv_res_first_name_lbl">Owner First Name: </label>
+						<input type = "text" id = "priv_res_first_name"/> <br/>
+						<label id = "priv_res_last_name_lbl">Owner Last Name: </label>
+						<input type = "text" id = "priv_res_last_name"/><br/>
+						<label id = "priv_res_address_lbl">Residence Address: </label>
+						<input type = "text" id = "priv_res_address"/><br/>
+						<label id = "priv_res_phone_number_lbl">Residence Phone: </label>
+						<input type = "text" id = "priv_res_phone_number"/><br/>
+						<label id = "priv_res_nights_there_lbl">Nights at Location: </label>
+						<input type = "text" id = "priv_res_nights_there"/><br/>
+					
+					</div><!--div lodging_type_private_residence-->
+				
+					<div id = "lodging_type_other">					
+			
+						<label id = "other_nights_there_lbl">Nights at Location: </label>
+						<input type = "text" id = "other_nights_there"/><br/>
+						<label id = "other_lodging_desc_lbl">Description of Lodging Situation: </label>
+						<input type = "text" id = "other_lodging_desc"/><br/>
+						<label id = "other_contact_first_name_lbl">Contact First Name: </label>
+						<input type = "text" id = "other_contact_first_name"/><br/>
+						<label id = "other_contact_last_name_lbl">Contact Last Name: </label>
+						<input type = "text" id = "other_contact_last_name"/><br/>
+			
+					</div><!--div lodging_type_other-->
+					
+				</div><!--div lodging_section-->
+
+				<div id = "new_lodging_div">
+
+				</div>
+
+				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = " " >Add Lodging Information</a>
+
+			</form><!--div lodging_info-->
+
+			
+			<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Previous Page</a>
+			<a href="#review_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Review Form</a>
+
+		</div> <!--div lodging_information-->
+
+		<div id = "review_page" data-role = "page">
+
+			<a href="#choose_reedit_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Change Form</a>
+			<a href=" " data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Submit</a>
+
+		</div><!--div review_page-->
+
+		<div id = "choose_reedit_page" data-role = "page">
+
+			<a href="#contact_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Contact Information</a>
+			<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Transportation Information</a>
+			<a href="#lodging_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Lodging Information</a>
+
+		</div><!--div choose reedit page-->
+
+	</body><!--body-->

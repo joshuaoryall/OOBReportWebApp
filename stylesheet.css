@@ -1,0 +1,103 @@
+/* Selectors are placed in alaphabetical order.
+ * A space is placed between the selector and opening curly brace.
+ */
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.login {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  text-align: center;
+  max-width: 400px;
+}
+.login h1 {
+  font-size: 300%;
+  color: #7D6A55;
+  margin-top: 0px;
+}
+
+/* Style rules for color stripes in header and footer */
+.orange_stripe {
+  height: 20px;
+  width: 100%;
+  margin: 0px;
+  background-color: #F47B20;
+} 
+.logo_stripe {
+  width: 100%;
+  background-color: #7D6A55;
+  text-align: center;
+}
+.logo_stripe img {
+  display: inline;
+  margin: 20px 0px;
+  padding: 0px;
+  width: 50%;
+  max-width: 231px;
+}
+
+/* Style rules for links */
+a { text-decoration: none; }
+a:link { color: #F47B20; }
+a:visited { color: #7D6A55; }
+a:hover { color: #BBB1A6; }
+a:active { color: #F47B20; }
+
+#elevated_risk_situation {
+	display: none;
+}
+
+#lodging_type_hotel {
+	display: none;
+}
+
+#lodging_type_other {
+	display: none;
+}
+
+#lodging_type_private_residence {
+	display: none;
+}
+
+#lodging_section {
+	display: none;
+}
+#other_mode_of_travel {
+	display: none;
+}
+
+#plane_mode_of_travel {
+	display: none;
+}
+
+#plane_type_commercial {
+	display: none;
+}
+
+#plane_type_private {
+	display: none;
+}
+
+#train_mode_of_travel {
+	display: none;
+}
+
+#vehicle_mode_of_travel {
+	display: none;
+}
+
+#vehicle_type_private {
+	display: none;
+}
+
+#vehicle_type_public {
+	display: none;
+}
+
+#vehicle_type_rental {
+	display: none;	
+}
