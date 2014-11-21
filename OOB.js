@@ -37,10 +37,14 @@ function page_load_elements()
 	var hotel = document.getElementById("lodging_type_hotel"); 
 	var private_res =  document.getElementById("lodging_type_private_residence"); 
 	var other_res = document.getElementById("lodging_type_other"); 
+	var type_zero = document.getElementById("lodging_check"); 
+	var leader_check = document.getElementById("trip_leader_check"); 
 	//Grab type selectors, other fields 
 
 	var ers_text = document.getElementById("elevated_risk_situation"); 
 	//Grab ERS fields 
+
+
 
 	ers_text.style.display = "none";
 
@@ -61,6 +65,8 @@ function page_load_elements()
 	hotel.style.display = "none";
 	private_res.style.display = "none";
 	other_res.style.display = "none";
+	type_zero.checked = false; 
+	leader_check.checked = false; 
 	//Set all of the grabbed fields to not visible 
 
 }//function page_load_elements
@@ -202,10 +208,10 @@ function lodging_choice()
 	//Pre: all corresponding input fields hidden except corresponding dropdown menus
 	//Post: Lodging section visible for information entry post type selection 
 
-	var lodging = document.getElementById("lodging_check");
+	var lodging = document.getElementById("lodging_check").checked;
 	var lodging_show = document.getElementById("lodging_section");
 
-	if (lodging.value == "Yes")
+	if (lodging)
 	{
 		lodging_show.style.display = "block";
 	}
@@ -329,44 +335,8 @@ function add_trans()
 {
 	 
 	var input_divide = document.getElementById("new_transportation_div"); 
-	var trans_header = document.createElement("h2"); 
-	//Grab divide for new labels and create header for new transportation
 	
 	var trans_choice = document.getElementById("mode_of_travel").value; 
-	var dept_day = document.getElementById("day_of_departure").value; 
-	var dest_leg = document.getElementById("destination_of_leg").value; 
-	var fin_dest = document.getElementById("final_dest_indicator").value; 
-	//Grab input field values and value of mode of travel selector 
-
-	var dept_day_lbl = document.createElement("label");
-	var dest_leg_lbl = document.createElement("label");
-	var fin_dest_lbl = document.createElement("label");
-	//Create labels for information 
-
-	trans_header.id = "trans_header_" + trans_count; 
-	trans_header.innerHTML = "Transportation for Leg " + trans_count; 
-	dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
-	dept_day_lbl.value = dept_day; 
-	dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
-	dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
-	dest_leg_lbl.value = dest_leg; 
-	dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
-	fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
-	fin_dest_lbl.value = fin_dest;  
-	fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
-	//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
-
-	input_divide.appendChild(trans_header); 
-	input_divide.appendChild(dept_day_lbl); 
-	input_divide.appendChild(dest_leg_lbl); 
-	input_divide.appendChild(fin_dest_lbl); 
-	//Append labels to new transportation fields 
-
-	document.getElementById("day_of_departure").value = " "; 
-	document.getElementById("destination_of_leg").value = " "; 
-	//document.getElementById("final_dest_indicator").value = " "; 
-	//Clear the fields for new inputs 
-
 
 	if(trans_choice == "Vehicle")
 	{
@@ -377,6 +347,43 @@ function add_trans()
 
 		if(veh_choice == "Rental")
 		{
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
+
 			//if using a rental car 
 			var rent_co = document.getElementById("rental_car_company").value; 
 			var rent_pu = document.getElementById("rental_car_pickup_date").value; 
@@ -426,6 +433,43 @@ function add_trans()
 		{
 			//if using public transportation 
 
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
+
 			var pub_desc = document.getElementById("public_vehicle_desc").value; 
 			//Grab input field value
 
@@ -451,6 +495,43 @@ function add_trans()
 		else if(veh_choice == "Private")
 		{
 			//if using private vehicle 
+
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
 
 			var priv_desc = document.getElementById("private_vehicle_desc").value; 
 			//Grab value of input field
@@ -488,6 +569,43 @@ function add_trans()
 		if(pln_choice == "Commercial")
 		{	
 			//if flying commercial flight 
+
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
 
 			var flight_num = document.getElementById("commercial_flight_number").value; 
 			var flight_car = document.getElementById("commercial_flight_carrier").value; 
@@ -552,6 +670,43 @@ function add_trans()
 		{
 			//if using private plane 
 
+			var trans_header = document.createElement("h2"); 
+			//Grab divide for new labels and create header for new transportation
+			
+			var dept_day = document.getElementById("day_of_departure").value; 
+			var dest_leg = document.getElementById("destination_of_leg").value; 
+			var fin_dest = document.getElementById("final_dest_indicator").value; 
+			//Grab input field values and value of mode of travel selector 
+
+			var dept_day_lbl = document.createElement("label");
+			var dest_leg_lbl = document.createElement("label");
+			var fin_dest_lbl = document.createElement("label");
+			//Create labels for information 
+
+			trans_header.id = "trans_header_" + trans_count; 
+			trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+			dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+			dept_day_lbl.value = dept_day; 
+			dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+			dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+			dest_leg_lbl.value = dest_leg; 
+			dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+			fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+			fin_dest_lbl.value = fin_dest;  
+			fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+			//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+			input_divide.appendChild(trans_header); 
+			input_divide.appendChild(dept_day_lbl); 
+			input_divide.appendChild(dest_leg_lbl); 
+			input_divide.appendChild(fin_dest_lbl); 
+			//Append labels to new transportation fields 
+
+			document.getElementById("day_of_departure").value = " "; 
+			document.getElementById("destination_of_leg").value = " "; 
+			document.getElementById("final_dest_indicator").value = " "; 
+			//Clear the fields for new inputs 
+
 			var priv_pln_desc = document.getElementById("private_plane_desc").value; 
 			//Grab input field values
 
@@ -583,6 +738,43 @@ function add_trans()
 	{
 		//if train transportation
 
+		var trans_header = document.createElement("h2"); 
+		//Grab divide for new labels and create header for new transportation
+		
+		var dept_day = document.getElementById("day_of_departure").value; 
+		var dest_leg = document.getElementById("destination_of_leg").value; 
+		var fin_dest = document.getElementById("final_dest_indicator").value; 
+		//Grab input field values and value of mode of travel selector 
+
+		var dept_day_lbl = document.createElement("label");
+		var dest_leg_lbl = document.createElement("label");
+		var fin_dest_lbl = document.createElement("label");
+		//Create labels for information 
+
+		trans_header.id = "trans_header_" + trans_count; 
+		trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+		dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+		dept_day_lbl.value = dept_day; 
+		dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+		dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+		dest_leg_lbl.value = dest_leg; 
+		dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+		fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+		fin_dest_lbl.value = fin_dest;  
+		fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+		//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+		input_divide.appendChild(trans_header); 
+		input_divide.appendChild(dept_day_lbl); 
+		input_divide.appendChild(dest_leg_lbl); 
+		input_divide.appendChild(fin_dest_lbl); 
+		//Append labels to new transportation fields 
+
+		document.getElementById("day_of_departure").value = " "; 
+		document.getElementById("destination_of_leg").value = " "; 
+		document.getElementById("final_dest_indicator").value = " "; 
+		//Clear the fields for new inputs 
+
 		var train_desc = document.getElementById("train_transport_desc").value; 
 		//Grab input field value
 
@@ -609,6 +801,43 @@ function add_trans()
 	{
 		//other transportation used 
 
+		var trans_header = document.createElement("h2"); 
+		//Grab divide for new labels and create header for new transportation
+		
+		var dept_day = document.getElementById("day_of_departure").value; 
+		var dest_leg = document.getElementById("destination_of_leg").value; 
+		var fin_dest = document.getElementById("final_dest_indicator").value; 
+		//Grab input field values and value of mode of travel selector 
+
+		var dept_day_lbl = document.createElement("label");
+		var dest_leg_lbl = document.createElement("label");
+		var fin_dest_lbl = document.createElement("label");
+		//Create labels for information 
+
+		trans_header.id = "trans_header_" + trans_count; 
+		trans_header.innerHTML = "Transportation for Leg " + trans_count; 
+		dept_day_lbl.id = "dept_day_lbl_" + trans_count; 
+		dept_day_lbl.value = dept_day; 
+		dept_day_lbl.innerHTML = "Departure Day: " + dept_day;
+		dest_leg_lbl.id = "dest_leg_lbl_" + trans_count; 
+		dest_leg_lbl.value = dest_leg; 
+		dest_leg_lbl.innerHTML = "Leg Destination: " + dest_leg; 
+		fin_dest_lbl.id = "fin_dest_lbl_" + trans_count;
+		fin_dest_lbl.value = fin_dest;  
+		fin_dest_lbl.innerHTML = "Final Destination?" + fin_dest; 
+		//Give each label an ID, the field's value, and a label with current infomation (innerHTML)
+
+		input_divide.appendChild(trans_header); 
+		input_divide.appendChild(dept_day_lbl); 
+		input_divide.appendChild(dest_leg_lbl); 
+		input_divide.appendChild(fin_dest_lbl); 
+		//Append labels to new transportation fields 
+
+		document.getElementById("day_of_departure").value = " "; 
+		document.getElementById("destination_of_leg").value = " "; 
+		document.getElementById("final_dest_indicator").value = " "; 
+		//Clear the fields for new inputs 
+
 		var other_desc = document.getElementById("other_transport_desc").value; 
 		//Grab input value
 
@@ -632,7 +861,13 @@ function add_trans()
 	}
 	else
 	{
+		var no_trans = document.createElement("h3"); 
 
+		no_trans.id = "no_trans_" + trans_count; 
+		no_trans.value = "none"; 
+		no_trans.innerHTML = "No Transportation on Leg " + trans_count; 
+
+		input_divide.appendChild(no_trans)
 	}
 
 	trans_count = trans_count + 1; 
@@ -641,145 +876,173 @@ function add_trans()
 
 function add_lodging()
 {	
+	var check = document.getElementById("lodging_check").checked; 
+	
 	var type = document.getElementById("type_of_lodging").value; 
-	var input_divide = document.getElementById("new_lodging_div"); 
+	
+	var input_divide = document.getElementById("new_lodging_div");
 
-	if(type == "Hotel")
+	var lodg_header = document.createElement("h3"); 
+
+	lodg_header.id = "lodg_header_" + lodg_count; 
+	lodg_header.innerHTML = "Lodging for leg " + lodg_count; 
+
+	input_divide.appendChild(lodg_header); 
+
+	if(check == true) 
 	{
-		var name = document.getElementById("hotel_name").value;
-		var address = document.getElementById("hotel_address").value; 
-		var phone = document.getElementById("hotel_phone").value;
-		var nights = document.getElementById("nights_at_hotel").value; 
 
-		var name_lbl = document.createElement("label"); 
-		var addr_lbl = document.createElement("label"); 
-		var phone_lbl = document.createElement("label"); 
-		var nights_lbl = document.createElement("label"); 
-		var lodg_lbl =  document.createElement("h3"); 
+		if(type == "Hotel")
+		{
+			var name = document.getElementById("hotel_name").value;
+			var address = document.getElementById("hotel_address").value; 
+			var phone = document.getElementById("hotel_phone").value;
+			var nights = document.getElementById("nights_at_hotel").value; 
 
-		lodg_lbl.id = "lodg_lbl_" + lodg_count; 
-		lodg_lbl.innerHTML = "Hotel Lodging"; 
-		name_lbl.id = "name_lbl_" + lodg_count; 
-		name_lbl.value = name; 
-		name_lbl.innerHTML = "Hotel Name: " + name; 
-		addr_lbl.id = "addr_lbl_" + lodg_count; 
-		addr_lbl.value = address; 
-		addr_lbl.innerHTML = "Hotel Address: " + address; 
-		phone_lbl.id = "phone_lbl_" + lodg_count; 
-		phone_lbl.value = phone; 
-		phone_lbl.innerHTML = "Hotel Phone: " + phone; 
-		nights_lbl.id = "nights_lbl_" + lodg_count; 
-		nights_lbl.value = nights; 
-		nights_lbl.innerHTML = "Nights at Location: " + nights; 
+			var name_lbl = document.createElement("label"); 
+			var addr_lbl = document.createElement("label"); 
+			var phone_lbl = document.createElement("label"); 
+			var nights_lbl = document.createElement("label"); 
+			var lodg_lbl =  document.createElement("h3"); 
 
-		input_divide.appendChild(lodg_lbl); 
-		input_divide.appendChild(name_lbl); 
-		input_divide.appendChild(addr_lbl); 
-		input_divide.appendChild(phone_lbl); 
-		input_divide.appendChild(nights_lbl); 
+			lodg_lbl.id = "lodg_lbl_" + lodg_count; 
+			lodg_lbl.innerHTML = "Hotel Lodging"; 
+			name_lbl.id = "name_lbl_" + lodg_count; 
+			name_lbl.value = name; 
+			name_lbl.innerHTML = "Hotel Name: " + name; 
+			addr_lbl.id = "addr_lbl_" + lodg_count; 
+			addr_lbl.value = address; 
+			addr_lbl.innerHTML = "Hotel Address: " + address; 
+			phone_lbl.id = "phone_lbl_" + lodg_count; 
+			phone_lbl.value = phone; 
+			phone_lbl.innerHTML = "Hotel Phone: " + phone; 
+			nights_lbl.id = "nights_lbl_" + lodg_count; 
+			nights_lbl.value = nights; 
+			nights_lbl.innerHTML = "Nights at Location: " + nights; 
 
-		document.getElementById("hotel_name").value = " "; 
-		document.getElementById("hotel_address").value = " "; 
-		document.getElementById("hotel_phone").value = " "; 
-		document.getElementById("nights_at_hotel").value = " ";  
+			input_divide.appendChild(lodg_lbl); 
+			input_divide.appendChild(name_lbl); 
+			input_divide.appendChild(addr_lbl); 
+			input_divide.appendChild(phone_lbl); 
+			input_divide.appendChild(nights_lbl); 
+
+			document.getElementById("hotel_name").value = " "; 
+			document.getElementById("hotel_address").value = " "; 
+			document.getElementById("hotel_phone").value = " "; 
+			document.getElementById("nights_at_hotel").value = " ";  
 
 
-	}
-	else if(type == "Private_residence")
-	{
-		//fname, lname, addr, phone, nights there
+		}
+		else if(type == "Private_residence")
+		{
+			//fname, lname, addr, phone, nights there
 
-		var first = document.getElementById("priv_res_first_name").value; 
-		var last = document.getElementById("priv_res_last_name").value; 
-		var addr = document.getElementById("priv_res_address").value; 
-		var ph = document.getElementById("priv_res_phone_number").value; 
-		var nights_there = document.getElementById("priv_res_nights_there").value; 
+			var first = document.getElementById("priv_res_first_name").value; 
+			var last = document.getElementById("priv_res_last_name").value; 
+			var addr = document.getElementById("priv_res_address").value; 
+			var ph = document.getElementById("priv_res_phone_number").value; 
+			var nights_there = document.getElementById("priv_res_nights_there").value; 
 
-		var first_lbl = document.createElement("label"); 
-		var last_lbl = document.createElement("label"); 
-		var addr_lbl = document.createElement("label"); 
-		var ph_lbl = document.createElement("label"); 
-		var nights_there_lbl = document.createElement("label"); 
-		var priv_res_lbl = document.createElement("h3"); 
+			var first_lbl = document.createElement("label"); 
+			var last_lbl = document.createElement("label"); 
+			var addr_lbl = document.createElement("label"); 
+			var ph_lbl = document.createElement("label"); 
+			var nights_there_lbl = document.createElement("label"); 
+			var priv_res_lbl = document.createElement("h3"); 
 
-		priv_res_lbl.id = "priv_res_lbl_" + lodg_count; 
-		priv_res_lbl.innerHTML = "Private Residence"; 
-		first_lbl.id = "first_lbl_" + lodg_count; 
-		first_lbl.value = first; 
-		first_lbl.innerHTML = "Owner First Name: " + first; 
-		last_lbl.id = "last_lbl_" + lodg_count; 
-		last_lbl.value = last; 
-		last_lbl.innerHTML = "Owner Last Name: " + last; 
-		addr_lbl.id = "addr_lbl_" + lodg_count; 
-		addr_lbl.value = addr; 
-		addr_lbl.innerHTML = "Residence Address: " + addr; 
-		ph_lbl.id = "ph_lbl_" + lodg_count; 
-		ph_lbl.value = ph; 
-		ph_lbl.innerHTML = "Residence Phone Number: " + ph; 
-		nights_there_lbl.id = "nights_there_lbl_" + lodg_count; 
-		nights_there_lbl.value = nights_there; 
-		nights_there_lbl.innerHTML = "Nights At Location: " + nights_there; 
+			priv_res_lbl.id = "priv_res_lbl_" + lodg_count; 
+			priv_res_lbl.innerHTML = "Private Residence"; 
+			first_lbl.id = "first_lbl_" + lodg_count; 
+			first_lbl.value = first; 
+			first_lbl.innerHTML = "Owner First Name: " + first; 
+			last_lbl.id = "last_lbl_" + lodg_count; 
+			last_lbl.value = last; 
+			last_lbl.innerHTML = "Owner Last Name: " + last; 
+			addr_lbl.id = "addr_lbl_" + lodg_count; 
+			addr_lbl.value = addr; 
+			addr_lbl.innerHTML = "Residence Address: " + addr; 
+			ph_lbl.id = "ph_lbl_" + lodg_count; 
+			ph_lbl.value = ph; 
+			ph_lbl.innerHTML = "Residence Phone Number: " + ph; 
+			nights_there_lbl.id = "nights_there_lbl_" + lodg_count; 
+			nights_there_lbl.value = nights_there; 
+			nights_there_lbl.innerHTML = "Nights At Location: " + nights_there; 
 
-		input_divide.appendChild(priv_res_lbl); 
-		input_divide.appendChild(first_lbl);
-		input_divide.appendChild(last_lbl);
-		input_divide.appendChild(addr_lbl);
-		input_divide.appendChild(ph_lbl);
-		input_divide.appendChild(nights_there_lbl);
+			input_divide.appendChild(priv_res_lbl); 
+			input_divide.appendChild(first_lbl);
+			input_divide.appendChild(last_lbl);
+			input_divide.appendChild(addr_lbl);
+			input_divide.appendChild(ph_lbl);
+			input_divide.appendChild(nights_there_lbl);
 
-		document.getElementById("priv_res_first_name").value = " "; 
-		document.getElementById("priv_res_last_name").value = " ";
-		document.getElementById("priv_res_address").value = " ";
-		document.getElementById("priv_res_phone_number").value = " ";
-		document.getElementById("priv_res_nights_there").value = " ";
+			document.getElementById("priv_res_first_name").value = " "; 
+			document.getElementById("priv_res_last_name").value = " ";
+			document.getElementById("priv_res_address").value = " ";
+			document.getElementById("priv_res_phone_number").value = " ";
+			document.getElementById("priv_res_nights_there").value = " ";
 
-	}
-	else if(type == "Other")
-	{
-		//nights, desc, contact first, contact last 
+		}
+		else if(type == "Other")
+		{
+			//nights, desc, contact first, contact last 
 
-		var nght_thr = document.getElementById("other_nights_there").value; 
-		var o_desc = document.getElementById("other_lodging_desc").value; 
-		var cont_fst = document.getElementById("other_contact_first_name").value; 
-		var cont_lst = document.getElementById("other_contact_last_name").value; 
+			var nght_thr = document.getElementById("other_nights_there").value; 
+			var o_desc = document.getElementById("other_lodging_desc").value; 
+			var cont_fst = document.getElementById("other_contact_first_name").value; 
+			var cont_lst = document.getElementById("other_contact_last_name").value; 
 
-		var nght_thr_lbl = document.createElement("label"); 
-		var o_desc_lbl = document.createElement("label"); 
-		var cont_fst_lbl = document.createElement("label"); 
-		var cont_lst_lbl = document.createElement("label"); 
-		var other_lodg_lbl = document.createElement("h3"); 
+			var nght_thr_lbl = document.createElement("label"); 
+			var o_desc_lbl = document.createElement("label"); 
+			var cont_fst_lbl = document.createElement("label"); 
+			var cont_lst_lbl = document.createElement("label"); 
+			var other_lodg_lbl = document.createElement("h3"); 
 
-		other_lodg_lbl.id = "other_lodg_lbl_" + lodg_count; 
-		other_lodg_lbl.innerHTML = "Other Lodging"; 
-		nght_thr_lbl.id = "nght_thr_lbl_" + lodg_count; 
-		nght_thr_lbl.value = nght_thr; 
-		nght_thr_lbl.innerHTML = "Nights At Location: " + nght_thr; 
-		o_desc_lbl.id = "o_desc_lbl_" + lodg_count; 
-		o_desc_lbl.value = o_desc; 
-		o_desc_lbl.innerHTML = "Lodging Description: " + o_desc; 
-		cont_fst_lbl.id = "cont_fst_lbl_" + lodg_count; 
-		cont_fst_lbl.value = cont_fst; 
-		cont_fst_lbl.innerHTML = "Location Owner First Name: " + cont_fst; 
-		cont_lst_lbl.id = "cont_lst_lbl_" + lodg_count; 
-		cont_lst_lbl.value = cont_lst; 
-		cont_lst_lbl.innerHTML = "Location Owner Last Name: " + cont_lst; 
+			other_lodg_lbl.id = "other_lodg_lbl_" + lodg_count; 
+			other_lodg_lbl.innerHTML = "Other Lodging"; 
+			nght_thr_lbl.id = "nght_thr_lbl_" + lodg_count; 
+			nght_thr_lbl.value = nght_thr; 
+			nght_thr_lbl.innerHTML = "Nights At Location: " + nght_thr; 
+			o_desc_lbl.id = "o_desc_lbl_" + lodg_count; 
+			o_desc_lbl.value = o_desc; 
+			o_desc_lbl.innerHTML = "Lodging Description: " + o_desc; 
+			cont_fst_lbl.id = "cont_fst_lbl_" + lodg_count; 
+			cont_fst_lbl.value = cont_fst; 
+			cont_fst_lbl.innerHTML = "Location Owner First Name: " + cont_fst; 
+			cont_lst_lbl.id = "cont_lst_lbl_" + lodg_count; 
+			cont_lst_lbl.value = cont_lst; 
+			cont_lst_lbl.innerHTML = "Location Owner Last Name: " + cont_lst; 
 
-		input_divide.appendChild(other_lodg_lbl);  
-		input_divide.appendChild(o_desc_lbl);
-		input_divide.appendChild(cont_fst_lbl);
-		input_divide.appendChild(cont_lst_lbl);
-		input_divide.appendChild(nght_thr_lbl);
+			input_divide.appendChild(other_lodg_lbl);  
+			input_divide.appendChild(o_desc_lbl);
+			input_divide.appendChild(cont_fst_lbl);
+			input_divide.appendChild(cont_lst_lbl);
+			input_divide.appendChild(nght_thr_lbl);
 
-		document.getElementById("other_nights_there").value = " "; 
-		document.getElementById("other_lodging_desc").value = " ";
-		document.getElementById("other_contact_last_name").value = " ";
-		document.getElementById("other_contact_first_name").value = " ";
+			document.getElementById("other_nights_there").value = " "; 
+			document.getElementById("other_lodging_desc").value = " ";
+			document.getElementById("other_contact_last_name").value = " ";
+			document.getElementById("other_contact_first_name").value = " ";
 
+		}
+		else
+		{
+
+		}
 	}
 	else
 	{
+		
+		var no_lodging = document.createElement("label"); 
+
+		
+		no_lodging.id = "no_lodging_" + lodg_count; 
+		no_lodging.value = "none"; 
+		no_lodging.innerHTML = "No lodging on leg " + lodg_count; 
+		
+		input_divide.appendChild(no_lodging); 
 
 	}
-	
+
+	lodg_count = lodg_count + 1; 
 }//function add_lodging()
 

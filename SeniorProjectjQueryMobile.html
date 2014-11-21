@@ -29,7 +29,7 @@
 				<h2>Traveler Information</h2>
 
 				<label id = "trip_leader_lbl">Trip Leader?</label>
-				<input type = "checkbox" id = "trip_leader_check"/><br/>
+				<input type = "checkbox" id = "trip_leader_check" checked = "true"/><br/>
 				<label id = "trip_member_first_name_lbl">First Name: </label>
 				<input type = "text" id = "trip_member_first_name"/><br/>
 				<label id = "trip_member_last_name_lbl">Last Name: </label>
@@ -110,7 +110,7 @@
 				<label>Leg Destination: </label>
 				<input type = "text" id = "destination_of_leg"/><br/>
 				<label>Final Destination? </label>
-				<input type = "checkbox" id = "final_dest_indicator"/><br/>
+				<input type = "checkbox" id = "final_dest_indicator" checked = "true"/><br/>
 
 
 				<label>Mode of Travel:</label>
@@ -255,19 +255,13 @@
 
 			<form id = "lodging_info">
 			
-				<label>Need a place to stay on this leg?</label>
-
-				<form action = "">
-					<select id = "lodging_check" onchange = "lodging_choice()">
-						<option value = " "> </option>
-						<option value = "Yes">Yes</option>
-						<option value = "No">No</option>
-					</select>
-				</form>
+				
+				<label>Lodging for this leg? </label>
+				<input type = "checkbox" id = "lodging_check" checked = "true" onchange = "lodging_choice()"/><br/>
 				
 				<div id = "lodging_section">
 					
-					Type of Lodging:
+					<label>Type of Lodging:</label>
 					<form action = "">
 						<select id = "type_of_lodging" onchange = "lodging_type()">
 							<option value = " "> </option>
