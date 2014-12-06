@@ -82,7 +82,7 @@
 					<label id = "form_contact_lbl" >Form of Contact: </label> 
 					<form action = "" id = "ers_contact_type">
 
-						<select id = "form of contact">
+						<select id = "form_of_contact">
 							<option value = "cell_phone">Cell Phone</option>
 							<option value = "satellite_phone">Satellite Phone</option>
 							<option value = "email">Email</option>
@@ -92,7 +92,7 @@
 
 				</div><!--div elevated_risk_situation-->
 
-				<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Continue</a>
+				<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline" onclick = "gather_misc(); add_traveler()">Continue</a>
 
 			</form><!--form contact_info_form-->
 
@@ -244,7 +244,7 @@
 			</form><!--from trans_info-->
 
 			<a href="#contact_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Previous</a>
-			<a href="#lodging_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Continue</a>
+			<a href="#lodging_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_trans()">Continue</a>
 
 		</div> <!--div transportation_information-->
 
@@ -325,14 +325,18 @@
 
 			
 			<a href="#transportation_information" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Previous Page</a>
-			<a href="#review_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Review Form</a>
+			<a href="#review_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_lodging(); create_text_itenerary()">Review Form</a>
 
 		</div> <!--div lodging_information-->
 
 		<div id = "review_page" data-role = "page">
 
-			<a href="#choose_reedit_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Change Form</a>
-			<a href=" " data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Submit</a>
+			<div id = "itenerary_div">
+
+			</div>
+
+			<a href="#choose_reedit_page" data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline"onclick = "clear_divide()">Change Form</a>
+			<a data-transition="slide" class="ui-btn ui-corner-all ui-btn-inline">Submit</a>
 
 		</div><!--div review_page-->
 
