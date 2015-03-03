@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app = "OOBReport">
+	<head>
+		<title>Out of Bed Report</title> 
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+		<script src="ModelController.js"></script> 
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+	</head>
+	<body>
+		<div data-role = "page" ng-controller = "PersonController as person" ng-submit = "person.addPersonInfo(person)"> 
+			<h2>Contact Information</h2>
+			Trip Leader?: <input ng-model = "person.tripLeader" type = "checkbox" id = "trip_leader_check"/>
+			First Name: <input ng-model = "person.firstName" type = "text" id = "trip_member_first_name"/>
+			Last Name: <input ng-model = "person.lastName" type = "text" id = "trip_member_last_name"/>
+			Contact Number: <input type = "text" id = "trip_member_contact_number"/>
+			
+			<h2>Vital Trip Information</h2>
+			Purpose of Trip: <textarea ng-model = "person.purposeOfTrip" id = "purpose_of_trip" rows = "10" cols = "30"></textarea>
+			Filer STS: <textarea ng-model = "person.filerSTS" id = "filer_sts" rows = "10" cols = "30"></textarea>
+			Group STS: <textarea ng-model = "person.groupSTS" id = "group_sts" rows = "10" cols = "30"></textarea>
+ 
+			<h2> Location Contact Information </h2>
+			First Name: <input ng-model = "person.locationContact.locConFirNm" type = "text" id = "location_contact_first_name"/>
+			Last Name: <input ng-model = "person.locationContact.locConLasNm" type = "text" id = "location_contact_last_name"/>
+			Contact Number: <input ng-model = "person.locationContact.locConContNum" type = "text" id = "location_contact_number" />
+
+			
+			Elevated Risk Situation? <input ng-model = "person.elevRisk" type = "checkbox" id = "chkElevRiskSit"/>
+			<div id = "ers"> 
+				Contact First Name: <input ng-model = "person.elevRiskContFName" type = "text" id = "elevRiskContFName" />
+				Contact Risk Name: <input ng-model = "person.elevRiskContLName" type = "text" id = "elevRiskContLName"/>
+				Contact Phone: <input ng-model = "person.elevRiskContNum" type = "text" id = "elevRiskContNum"/>
+				Form of Contact: <input ng-model = "person.elevRiskContFrm" type = "text" id = "elevRiskContFrm"/>
+			</div>
+			
+
+		</div>
+
+		<div data-role = "page" ng-controller = "TransportationController as transport" ng-submit = "transport.addTransInfo(transport)">
+			<h1>Transportation Information</h1>
+
+			<h2>Overall Leg Information</h2>
+			Day of Departure: <input ng-model = "transport.departureDay" type = "text" id = "departureDay"/>
+			Leg Destination: <input ng-model = "tranport.legDestination" type = "text" id = "legDestination" />
+			Final Destination? <input ng-model = "transport.finalDest" type = "checkbox" id = "finalDest" />
+
+			<h2>Travel Information</h2>
+			<select id = "mode_of_travel" onchange = "transportation_choice()" ng-model = "transport.type">
+				<option value = " "> </option>
+				<option value = "Vehicle" >Vehicle</option>
+				<option value = "Plane" >Plane</option>
+				<option value = "Train" >Train</option>
+				<option value = "Other" >Other</option>
+			</select> 
+			
+			<div id = "travelInfo">
+
+				<div id = "vehicleMode">
+					
+					<select id = "type_of_vehicle" onchange = "vehicle_type_choice()">
+						<option value = " "> </option>
+						<option value = "Rental">Rental</option>
+						<option value = "Private">Private</option>
+						<option value = "Public">Public</option>
+					</select>
+
+					<div id = "privVehicleMode">
+						Description: <input type = "text" ng-model = "transport.vehicle.priv.desc" id = "privVehDesc"/>
+					</div>
+					
+					<div id = "pubVehicleMode">
+						Description: <input type = "text" ng-model = "transport.vehicle.pub.desc" id = "pubVehDesc"/>
+					</div>
+					
+					<div id = "rentalVehicleMode">
+						Rental Car Company: <input type = "text" ng-model = "transport.vehicle.rental.company" id = "rentalVehicleCompany"/>
+						Pickup Date: <input type = "text" ng-model = "transport.vehicle.rental.pickupDate" id = "rentalVehiclePickupDate"/>
+						Dropoff Date: <input type = "text" ng-model = "transport.vehicle.rental.dropoffDate" id = "rentalVehicleDropoffDate"/>
+						Description: <input type = "text" ng-model = "transport.vehicle.rental.desc" id = "rentalVehicleDesc"/>
+					</div>
+
+				</div>
+				
+				<div id = "planeMode">
+					
+					<select id = "type_of_plane" onchange = "plane_type_choice()">
+						<option value = " "> </option>
+						<option value = "Commercial">Commercial</option>
+						<option value = "Private">Private</option>
+					</select>
+
+					<div id = "privPlaneMode">
+						Description: <input type = "text" id = "privatePlaneDesc"/>
+					</div>
+					
+					<div id = "pubPlaneMode">
+						Flight Number: <input ng-model = "transport.plane.commercial.flightNum" type = "text" id = "commercialFlightNumber"/>
+	
+					</div>
+
+				</div>
+				
+				<div id = "trainMode">
+					
+				</div>
+
+				<div id = "otherMode">
+					
+				</div>
+
+			</div>
+
+		</div>
+
+		<div data-role = "page" id = "lodgingPage" ng-controller = "LodgingController as lodging" ng-submit = "lodging.addLodgingInfo(lodging)">
+			<div id = "lodgingInfo">
+				
+				<div id = "hotelMode">
+					
+				</div><!--hotelMode-->
+
+				<div id = "privResMode">
+					
+				</div><!--privResMode-->
+
+				<div id = "otherHousingMode">
+					
+				</div><!--otherHousingMode-->
+
+			</div> <!--lodgingInfo-->
+		</div><!--Lodging -->
+
+		<div data-role = "page" id = "editPage">
+
+		</div><!--editPage-->
+
+
+	</body>  
+</html>  
