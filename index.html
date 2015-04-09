@@ -12,20 +12,20 @@
 	<body>
 		<div data-role = "page" ng-controller = "PersonController as person" ng-submit = "person.addPersonInfo(person)"> 
 			<h2>Contact Information</h2>
-			Trip Leader?: <input ng-model = "person.tripLeader" type = "checkbox" id = "trip_leader_check"/>
-			First Name: <input ng-model = "person.firstName" type = "text" id = "trip_member_first_name"/>
-			Last Name: <input ng-model = "person.lastName" type = "text" id = "trip_member_last_name"/>
-			Contact Number: <input type = "text" id = "trip_member_contact_number"/>
+			Trip Leader?: <input ng-model = "person.tripLeader" type = "checkbox" id = "tripLeaderCheck"/>
+			First Name: <input ng-model = "person.firstName" type = "text" id = "tripMemberFirstName"/>
+			Last Name: <input ng-model = "person.lastName" type = "text" id = "tripMemberLastName"/>
+			Contact Number: <input type = "text" id = "tripMemberContactNumber"/>
 			
 			<h2>Vital Trip Information</h2>
-			Purpose of Trip: <textarea ng-model = "person.purposeOfTrip" id = "purpose_of_trip" rows = "10" cols = "30"></textarea>
-			Filer STS: <textarea ng-model = "person.filerSTS" id = "filer_sts" rows = "10" cols = "30"></textarea>
-			Group STS: <textarea ng-model = "person.groupSTS" id = "group_sts" rows = "10" cols = "30"></textarea>
+			Purpose of Trip: <textarea ng-model = "person.purposeOfTrip" id = "purposeOfTrip" rows = "10" cols = "30"></textarea>
+			Filer STS: <textarea ng-model = "person.filerSTS" id = "filerSTS" rows = "10" cols = "30"></textarea>
+			Group STS: <textarea ng-model = "person.groupSTS" id = "groupSTS" rows = "10" cols = "30"></textarea>
  
 			<h2> Location Contact Information </h2>
-			First Name: <input ng-model = "person.locationContact.locConFirNm" type = "text" id = "location_contact_first_name"/>
-			Last Name: <input ng-model = "person.locationContact.locConLasNm" type = "text" id = "location_contact_last_name"/>
-			Contact Number: <input ng-model = "person.locationContact.locConContNum" type = "text" id = "location_contact_number" />
+			First Name: <input ng-model = "person.locationContact.locConFirNm" type = "text" id = "locationContactFirstName"/>
+			Last Name: <input ng-model = "person.locationContact.locConLasNm" type = "text" id = "locationContactLastName"/>
+			Contact Number: <input ng-model = "person.locationContact.locConContNum" type = "text" id = "locationContactNumber" />
 
 			
 			Elevated Risk Situation? <input ng-model = "person.elevRisk" type = "checkbox" id = "chkElevRiskSit"/>
@@ -98,17 +98,21 @@
 					
 					<div id = "pubPlaneMode">
 						Flight Number: <input ng-model = "transport.plane.commercial.flightNum" type = "text" id = "commercialFlightNumber"/>
-	
+						Flight Carrier: <input ng-model = "transport.plane.commercial.carrier" type = "text" id = "commercialFlightCarrier" />
+						Departing Airport: <input ng-model = "transport.plane.commercial.departApt" type = "text" id = "commercialFlightDeptApt" />
+						Departure Time: <input ng-model = "transport.plane.commercial.departTime" type = "text" id = "commercialFlightDeptTime" />
+						Arrival Airport: <input ng-model = "transport.plane.commercial.arrivalApt" type = "text" id = "commercialFlightArrApt" />
+						Arrival Time: <input ng-model = "transport.plane.commercial.arrivalTime" type = "text" id = "commercialFlightArrTime" />
 					</div>
 
 				</div>
 				
 				<div id = "trainMode">
-					
+					Description: <input ng-model = "transport.train.desc" type = "text" id = "trainDesc" />
 				</div>
 
 				<div id = "otherMode">
-					
+					Description: <input ng-model = "transport.other.desc" type = "text" id = "otherDesc" />
 				</div>
 
 			</div>
@@ -119,22 +123,33 @@
 			<div id = "lodgingInfo">
 				
 				<div id = "hotelMode">
+					Hotel Name: <input ng-model = "lodging.hotel.name" type = "text" id = "hotelName" />
+					Hotel Address: <input ng-model = "lodging.hotel.address" type = "text" id = "hotelAddr" />
+					Hotel Phone: <input ng-model = "lodging.hotel.phone" type = "text" id = "hotelPhone" />
+					Hotel Name: <input ng-model = "lodging.hotel.name" type = "text" id = "hotelAddr" />
 					
 				</div><!--hotelMode-->
 
 				<div id = "privResMode">
-					
+					Owner First Name: <input ng-model = "lodging.privateResidence.first" type = "text" id = "privOwnerFirst" />
+					Owner Last Name: <input ng-model = "lodging.privateResidence.last" type = "text" id = "privOwnerLast" />
+					Residence Address: <input ng-model = "lodging.privateResidence.address" type = "text" id = "privAddr" />
+					Residence Phone Number: <input ng-model = "lodging.privateResidence.phone" type = "text" id = "privPhone" />
+					Nights at Residence: <input ng-model = "lodging.privateResidence.nights" type = "text" id = "privNights" /> 
 				</div><!--privResMode-->
 
 				<div id = "otherHousingMode">
-					
+					Description of Location: <input ng-model = "lodging.other.desc" type = "text" id = "otherDesc" />
+					Owner First Name: <input ng-model = "lodging.other.first" type = "text" id = "otherOwnerFirst" />
+					Owner Last Name: <input ng-model = "lodging.other.last" type = "text" id = "otherOwnerLast" />
+					Nights At Location <input ng-model = "lodging.other.nights" type = "text" id = "otherNights" />
 				</div><!--otherHousingMode-->
 
 			</div> <!--lodgingInfo-->
 		</div><!--Lodging -->
 
 		<div data-role = "page" id = "editPage">
-
+			
 		</div><!--editPage-->
 
 
