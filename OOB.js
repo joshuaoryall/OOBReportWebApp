@@ -66,20 +66,326 @@ function page_load_elements()
 
 }//function page_load_elements
 
-var traveler_count = 1; 
+var traveler_count = 0;
 //For add/remove traveler functions 
-var trans_count = 1; 
+var trans_count = 0;
 //For keeping track of transportation by leg 
-var lodg_count = 1; 
+var lodg_count = 0;
 //for keeping track of lodging by leg 
-var trans_array = []; 
+var trans_array = [];
 //Keep track of transportation information 
-var lodg_array = []; 
+var lodg_array = [];
 //Keep track of lodging information
-var trav_array = []; 
+var trav_array = [];
 //Keep track of travelers and information 
 var other_info_array = [];
 //Keeping track  
+
+function TravelerObject()
+{
+	this.first;
+	this.last;
+	this.phone;
+	this.isLeader;
+
+	function getFirst(){
+		return this.first;
+	}
+
+	function setFirst(fst){
+		this.first = fst;
+	}
+
+	function getLast(){
+		return this.last;
+	}
+
+	function setLast(lst){
+		this.last = lst;
+	}
+
+	function getPhone(){
+		return this.phone;
+	}
+
+	function setPhone(phn){
+		this.phone = phn;
+	}
+
+	function getLeader(){
+		return this.isLeader;
+	}
+
+	function setLeader(ldr){
+		this.isLeader = ldr;
+	}
+
+	function vardump(){
+		//return all values 
+	}
+ 
+}
+
+function MiscObject()
+{
+	this.tripPurpose;
+	this.filerSTS;
+	this.groupSTS;
+	this.locContactFName;
+	this.locContactLName;
+	this.locContactPhone; 
+	this.elevatedRisk; 
+	this.elevMemberFName; 
+	this.elevMemberLName; 
+	this.elevMemberPhone; 
+	this.elevMemberContForm; 
+
+	function getTripPurpose(){
+		return this.tripPurpose ; 
+	}
+
+	function setTripPurpose (trp){
+		this.tripPurpose = trp;
+	}
+
+	function getFilerSTS (){
+		return this.filerSTS ; 
+	}
+
+	function setFilerSTS(fsts){
+		this.filerSTS = fsts;
+	}
+	
+	function getGroupSTS (){
+		return this.groupSTS ; 
+	}
+
+	function setGroupSTS(gsts){
+		this.groupSTS = gsts;
+	}
+	
+	function getLocContactFName(){
+		return this.locContactFName ; 
+	}
+
+	function setLocContactLName(lname){
+		this.locContactLName = lname;
+	}
+	
+	function getLocContactPhone(){
+		return this.locContactPhone; 
+	}
+
+	function setLocContactPhone(phone){
+		this.locContactPhone = phone;
+	}
+	
+	function getElevatedRisk(){
+		return this.elevatedRisk; 
+	}
+
+	function setElevatedRisk(risk){
+		this.elevatedRisk = risk;
+	}
+
+	function getElevMemberFName(){
+		return this.elevMemberFName; 
+	}
+
+	function setElevMemberFName(fname){
+		this.elevMemberFName = fname;
+	}
+
+	function getElevMemberLName(){
+		return this.elevMemberLName; 
+	}
+
+	function setElevMemberLName(lname){
+		this.elevMemberLName = lname;
+	}
+	function getElevMemberPhone(){
+		return this.elevMemberPhone;
+	}
+
+	function setElevMemberPhone(elevPhone){
+		this.elevMemberPhone = elevPhone;
+	}
+	function getElevMemberContForm(){
+		return this.elevMemberContForm; 
+	}
+
+	function setElevMemberContForm(elevCont){
+		this.elevMemberContForm = elevCont;
+	}
+}
+
+function TransportationObject()
+{
+	var mode_of_travel = document.getElementById("mode_of_travel_selector").value;
+
+	if(model_of_travel == "Vehicle")
+	{
+		var vehicle_mode_of_travel = document.getElementById("type_of_vehicle").value;
+
+		if(vehicle_mode_of_travel == "Rental")
+		{
+			this.company; 
+			this.pickup; 
+			this.dropoff;
+			this.desc;
+
+			function getCompany(){
+				return this.company; 
+			}
+
+			function setCompany(co){
+				this.company = co;
+			}
+
+			function getPickup(){
+				return this.pickup; 
+			}
+
+			function setPickup(pu){
+				this.pickup = pu;
+			}
+
+			function getDropoff(){
+				return this.dropoff; 
+			}
+
+			function setDropoff(dof){
+				this.dropoff = dof;
+			}
+
+			function getDesc(){
+				return this.desc; 
+			}
+
+			function setDesc(de){
+				this.desc = de;
+			}
+
+		}
+		else 
+		{
+			this.desc; 
+
+			function getDesc(){
+				return this.desc ; 
+			}
+
+			function setDesc(de){
+				this.desc = de;
+			}
+		}
+	}
+	else if(mode_of_travel == "Plane")
+	{
+		var plane_mode_of_travel = document.getElementById("type_of_plane").value; 
+
+		if(plane_mode_of_travel == "Commercial")
+		{
+			this.flightNumber; 
+			this.flightCarrier; 
+			this.aptDept;
+			this.DeptTime; 
+			this.aptArr; 
+			this.aptArrTime; 
+
+			function getFlightNumber(){
+				return this.flightNumber; 
+			}
+
+			function setFlightNumber(nbr){
+				this.flightNumber = nbr;
+			}
+
+			function getFlightCarrier(){
+				return this.flightCarrier; 
+			}
+
+			function setFlightCarrier(car){
+				this.flightCarrier = car;
+			}
+
+			function getAptDept(){
+				return this.aptDept; 
+			}
+
+			function setAptDept(dept){
+				this.aptDept = dept;
+			}
+
+			function getDeptTime(){
+				return this.deptTime; 
+			}
+
+			function setDeptTime(dtime){
+				this.deptTime = dtime;
+			}
+
+			function getAptArr(){
+				return this.aptArr; 
+			}
+
+			function setAptArr(arr){
+				this.aptArr = arr;
+			}
+
+			function getArrTime(){
+				return this.aptArrTime; 
+			}
+
+			function setArrTime(atime){
+				this.aptArrTime = atime;
+			}
+		}
+		else
+		{
+			this.desc; 
+
+			function getDesc(){
+				return this.desc ; 
+			}
+
+			function setDesc(de){
+				this.desc = de;
+			}
+		}
+	}
+	else if(mode_of_travel == "Train")
+	{
+		this.desc; 
+
+		function getDesc(){
+			return this.desc ; 
+		}
+
+		function setDesc(de){
+			this.desc = de;
+		}
+
+			
+	}
+	else
+	{
+		this.desc; 
+
+		function getDesc(){
+			return this.desc ; 
+		}
+
+		function setDesc(de){
+			this.desc = de;
+		}
+	}
+}
+
+function LodgingObject()
+{
+
+}
 
 function elevated_risk()
 {
@@ -346,11 +652,16 @@ function remove_traveler(count)
 {
 	//<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_traveler()" >Add Traveler</a>
 	var rem_ct = count; 
+	var fid = "fname_lbl_" + rem_ct; 
+	var lid = "lname_lbl_" + rem_ct;
+	var pid = "number_lbl_" +rem_ct;
+	var lblid = "trav_lbl_" + rem_ct; 
+
 	var input_divide = document.getElementById("new_traveler"); 
-	var first_nm = document.getElementById("fname_lbl_" + rem_ct); 
-	var last_nm = document.getElementById("lname_lbl_" + rem_ct); 
-	var phone_nbr = document.getElementById("number_lbl_" + rem_ct); 
-	var lbl = document.getElementById("trav_lbl_" + rem_ct); 
+	var first_nm = document.getElementById(fid); 
+	var last_nm = document.getElementById(lid); 
+	var phone_nbr = document.getElementById(pid); 
+	var lbl = document.getElementById(lblid); 
 
 	input_divide.remove(first_nm);
 	input_divide.remove(last_nm); 
@@ -1166,91 +1477,6 @@ function add_lodging()
 }//function add_lodging()
 
 
-//Object Oriented JavaScript from here down 
-
-function Traveler(f,l,p,t)
-{
-	this.first = "Trip Member First Name: " + f; 
-	this.last = "Trip Member Last Name" + l; 
-	this.phone = "Trip Member Phone Number: " + p; 
-	this.is_leader = "Is Leader: " + t; 
-}
-
-function Transportation(arg)
-{
-	var type_trans = document.getElementById("mode_of_travel").value;
-
-	//parse the arg (arg.arg1, arg.arg2,....) for information. set this.attribute equal to the arg.argX
-
-	if(type_trans == "Vehicle")
-	{
-		var type_veh = document.getElementById("type_of_vehicle").value; 
-
-		if(type_veh == "Rental")
-		{
-			this.comp = arg.arg1; 
-			this.pu = arg.arg2;
-			this.dr = arg.arg3; 
-			this.de = arg.arg4; 
-		}
-		else 
-		{
-			this.desc = arg.arg1; 
-		}
-		
-	}
-	else if(type_trans == "Plane")
-	{
-		var type_plane = document.getElementById("type_of_plane").value; 
-
-		if(type_plane == "Commercial")
-		{
-			this.nbr = arg.arg1; 
-			this.car = arg.arg2; 
-			this.ad = arg.arg3; 
-			this.dt = arg.arg4; 
-			this.arap = arg.arg5; 
-			this.at = arg.arg6; 
-		}
-		else
-		{
-			this.des = arg.arg1; 
-		}
-	}
-	else
-	{
-		this.des = arg.arg1; 
-	}
-}
-
-function Lodging(arg)
-{
-	var lodg = document.getElementById(type_of_lodging).value;
-
-	if(lodg == "Hotel")
-	{
-		this.nm = arg.arg1; 
-		this.ad = arg.arg2; 
-		this.ph = arg.arg3; 
-		this.ni = arg.arg4;
-	}
-	else if(lodg == "Private_residence")
-	{
-		this.fn = arg.arg1; 
-		this.ln = arg.arg2; 
-		this.ad = arg.arg3; 
-		this.ph = arg.arg4; 
-		this.ni = arg.arg5; 
-	}
-	else
-	{
-		this.ni = arg.arg1; 
-		this.de = arg.arg2; 
-		this.fn = arg.arg3; 
-		this.ln = arg.arg4; 
-	}
-}
-
 function gather_traveler(arg)
 {
 	//var trav = Traveler(f,l,t,p); 
@@ -1270,8 +1496,6 @@ function gather_lodging(lodg)
 function gather_misc()
 {
 	//call at push of next button on contact info page 
-
-	alert("You're in. Should you choose to proceed with your mission..."); 
 
 	var pot = document.getElementById("purpose_of_trip").value; 
 	var fsts = document.getElementById("filer_sts").value; 
