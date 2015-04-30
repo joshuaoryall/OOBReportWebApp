@@ -958,7 +958,6 @@ function gather_lodging(lodg)
 function gather_misc()
 {
 //call at push of next button on contact info page
-    alert("You're in. Should you choose to proceed with your mission...");
     var pot = document.getElementById("purpose_of_trip").value;
     var fsts = document.getElementById("filer_sts").value;
     var gsts = document.getElementById("group_sts").value;
@@ -990,9 +989,14 @@ function create_text_itenerary()
         info.innerHTML = other_info_array[i];
         div_input.appendChild(info);
     }
+
+    var travelerLabel = document.createElement("h1");
+    travelerLabel.innerHTML = "Travelers";
+    div_input.appendChild(travelerLabel);
+
     for(j = 0; j < trav_array.length; j++)
     {
-        var lbl = document.createElement("label");
+        var lbl = document.createElement("h3");
         lbl.innerHTML = "Traveler " + (j+1);
         div_input.appendChild(lbl);
         var person = trav_array[j];
@@ -1003,8 +1007,17 @@ function create_text_itenerary()
             div_input.appendChild(info_trav);
         }
     }
+
+    var transportationLabel = document.createElement("h1");
+    transportationLabel.innerHTML = "Transportation";
+    div_input.appendChild(transportationLabel);
+
     for(k = 0; k < trans_array.length; k++)
     {
+        var transLabel = document.createElement("h3");
+        transLabel.innerHTML = "Transport for leg " + (k+1);
+        div_input.appendChild(transLabel);
+
 //Add descriptors to push() in add_lodging, trans, trav
         var trans = trans_array[k];
         for(y = 0; y < trans.length; y ++)
@@ -1014,8 +1027,17 @@ function create_text_itenerary()
             div_input.appendChild(info_trans);
         }
     }
+
+    var lodgingLabel = document.createElement("h1");
+    lodgingLabel.innerHTML = "Lodging";
+    div_input.appendChild(lodgingLabel);
+
     for(l = 0; l < lodg_array.length; l++)
     {
+        var lodgLabel = document.createElement("h3");
+        lodgLabel.innerHTML = "Lodging for leg " + (l+1);
+        div_input.appendChild(lodgLabel);
+
         var lodgi = lodg_array[l];
         for(z = 0; z < lodgi.length; z++)
         {
