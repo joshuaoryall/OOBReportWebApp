@@ -42,7 +42,8 @@
 				</div><!--div new_traveler-->
 
 
-				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_traveler()" >Add Traveler</a>
+				<a class="ui-btn ui-corner-all ui-btn-inline" id = "addbtn" onclick = "add_traveler()" >Add Traveler</a>
+				<a class="ui-btn ui-corner-all ui-btn-inline" id = "rmbtn" onclick = "remove_traveler()" >Remove Traveler</a>
 
 
 				<label id = "trip_purpose_lbl">Purpose of Trip:</label>
@@ -240,6 +241,8 @@
 				</div>
 
 				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_trans()" >Add Transportation Information</a>
+				<a class="ui-btn ui-corner-all ui-btn-inline" id = "rmbtn" onclick = "remove_trans()" >Remove Transportation Information</a>
+
 
 			</form><!--from trans_info-->
 
@@ -320,7 +323,7 @@
 				</div>
 
 				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "add_lodging()" >Add Lodging Information</a>
-
+				<a class="ui-btn ui-corner-all ui-btn-inline" onclick = "remove_lodg()" >Remove Lodging Information</a>
 			</form><!--div lodging_info-->
 
 			
